@@ -1,4 +1,5 @@
 import methods.BisectionMethod;
+import methods.FibonacciSearchMethod;
 import methods.GoldenSectionSearch;
 
 public class Main {
@@ -8,5 +9,6 @@ public class Main {
         System.out.println("Golden Section Search Method: "
                 + goldenSectionSearch.getFunctionMinimum()
                 + "\nBisection Method: " + bisectionMethod.getFunctionMinimum());
+        System.out.print("\n" + FibonacciSearchMethod.fibonacci(3));
     }
 }

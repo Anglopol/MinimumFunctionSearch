@@ -4,15 +4,6 @@ import function.Function;
 
 public class BisectionMethod extends AbstractMethod {
 
-    private double delta = Function.EPSILON / 4;
-
-    public BisectionMethod() {
-        startOfInterval = Function.START_OF_INTERVAL;
-        endOfInterval = Function.END_OF_INTERVAL;
-        setPoints();
-    }
-
-
     @Override
     protected void setFirstPoint() {
         firstPoint = (startOfInterval + endOfInterval) / 2 - delta;

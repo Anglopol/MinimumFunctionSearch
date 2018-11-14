@@ -4,14 +4,6 @@ import function.Function;
 
 public class GoldenSectionSearch extends AbstractMethod {
 
-    private double delta = Function.EPSILON / 4;
-
-    public GoldenSectionSearch() {
-        startOfInterval = Function.START_OF_INTERVAL;
-        endOfInterval = Function.END_OF_INTERVAL;
-        setPoints();
-    }
-
     @Override
     protected void setFirstPoint() {
         firstPoint = startOfInterval + ((3 - Math.sqrt(5)) / 2)
@@ -45,4 +37,5 @@ public class GoldenSectionSearch extends AbstractMethod {
         }
         return (startOfInterval + endOfInterval) / 2;
     }
+
 }
