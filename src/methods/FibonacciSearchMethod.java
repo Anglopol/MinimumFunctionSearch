@@ -1,17 +1,15 @@
 package methods;
 
-import function.Function;
-
 public class FibonacciSearchMethod extends AbstractMethod {
 
-    private int n;
+    private double n;
 
     public FibonacciSearchMethod() {
         super();
         calcN();
     }
 
-    static public int fibonacci(int n) {
+    static public double fibonacci(double n) {
         if (n - 1 <= 1) {
             return n;
         }
@@ -20,12 +18,12 @@ public class FibonacciSearchMethod extends AbstractMethod {
 
     @Override
     protected void setFirstPoint() {
-
+        firstPoint = startOfInterval + (fibonacci(n) / fibonacci(n + 2)) * (endOfInterval - startOfInterval);
     }
 
     @Override
     protected void setSecondPoint() {
-
+        secondPoint = startOfInterval + (fibonacci(n + 1) / fibonacci(n + 2)) * (endOfInterval - startOfInterval);
     }
 
     @Override

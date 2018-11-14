@@ -17,6 +17,10 @@ public abstract class AbstractMethod {
         setPoints();
     }
 
+    protected double functionAtPoint(double x) {
+        return Function.functionAtPoint(x);
+    }
+
     protected abstract void setFirstPoint();
     protected abstract void setSecondPoint();
 

@@ -18,21 +18,21 @@ public class GoldenSectionSearch extends AbstractMethod {
 
     @Override
     public double getFunctionMinimum() {
-        double firstPointFunction = Function.functionAtPoint(firstPoint),
-                secondPointFunction = Function.functionAtPoint(secondPoint);
+        double firstPointFunction = functionAtPoint(firstPoint),
+                secondPointFunction = functionAtPoint(secondPoint);
         while (Math.abs(endOfInterval - startOfInterval) > delta) {
             if(firstPointFunction < secondPointFunction) {
                 endOfInterval = secondPoint;
                 secondPoint = firstPoint;
                 secondPointFunction = firstPointFunction;
                 setFirstPoint();
-                firstPointFunction = Function.functionAtPoint(firstPoint);
+                firstPointFunction = functionAtPoint(firstPoint);
             } else {
                 startOfInterval = firstPoint;
                 firstPoint = secondPoint;
                 firstPointFunction = secondPointFunction;
                 setSecondPoint();
-                secondPointFunction = Function.functionAtPoint(secondPoint);
+                secondPointFunction = functionAtPoint(secondPoint);
             }
         }
         return (startOfInterval + endOfInterval) / 2;
