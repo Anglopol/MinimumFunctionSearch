@@ -25,7 +25,7 @@ public class BisectionMethod extends AbstractMethod {
 
     @Override
     public double getFunctionMinimum() {
-        while (Math.abs(endOfInterval - startOfInterval) > Function.EPSILON) {
+        while (Math.abs(endOfInterval - startOfInterval) > delta) {
             if (Function.functionAtPoint(firstPoint) > Function.functionAtPoint(secondPoint)) {
                 startOfInterval = secondPoint;
             } else {

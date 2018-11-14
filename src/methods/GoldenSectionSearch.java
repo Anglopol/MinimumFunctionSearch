@@ -3,6 +3,9 @@ package methods;
 import function.Function;
 
 public class GoldenSectionSearch extends AbstractMethod {
+
+    private double delta = Function.EPSILON / 4;
+
     public GoldenSectionSearch() {
         startOfInterval = Function.START_OF_INTERVAL;
         endOfInterval = Function.END_OF_INTERVAL;
@@ -23,18 +26,21 @@ public class GoldenSectionSearch extends AbstractMethod {
 
     @Override
     public double getFunctionMinimum() {
-        double ai = Function.functionAtPoint(firstPoint), bi = Function.functionAtPoint(secondPoint);
-        while (Math.abs(endOfInterval - startOfInterval) > Function.EPSILON) {
-            if (ai >= bi) {
-                startOfInterval = firstPoint;
-                firstPoint = secondPoint;
-                setSecondPoint();
-                ai = Function.functionAtPoint(firstPoint);
-            } else {
+        double firstPointFunction = Function.functionAtPoint(firstPoint),
+                secondPointFunction = Function.functionAtPoint(secondPoint);
+        while (Math.abs(endOfInterval - startOfInterval) > delta) {
+            if(firstPointFunction < secondPointFunction) {
                 endOfInterval = secondPoint;
                 secondPoint = firstPoint;
+                secondPointFunction = firstPointFunction;
                 setFirstPoint();
-                bi = Function.functionAtPoint(secondPoint);
+                firstPointFunction = Function.functionAtPoint(firstPoint);
+            } else {
+                startOfInterval = firstPoint;
+                firstPoint = secondPoint;
+                firstPointFunction = secondPointFunction;
+                setSecondPoint();
+                secondPointFunction = Function.functionAtPoint(secondPoint);
             }
         }
         return (startOfInterval + endOfInterval) / 2;
