@@ -1,7 +1,5 @@
 package methods;
 
-import function.Function;
-
 public class BisectionMethod extends AbstractMethod {
 
     @Override

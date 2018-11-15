@@ -1,7 +1,5 @@
 package methods;
 
-import function.Function;
-
 public class GoldenSectionSearch extends AbstractMethod {
 
     @Override
