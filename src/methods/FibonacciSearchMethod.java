@@ -3,10 +3,12 @@ package methods;
 public class FibonacciSearchMethod extends AbstractMethod {
 
     private double n;
+    private double k;
 
     public FibonacciSearchMethod() {
         super();
         calcN();
+        k = 1;
     }
 
     static public double fibonacci(double n) {
@@ -18,28 +20,31 @@ public class FibonacciSearchMethod extends AbstractMethod {
 
     @Override
     protected void setFirstPoint() {
-        firstPoint = startOfInterval + (fibonacci(n) / fibonacci(n + 2)) * (endOfInterval - startOfInterval);
+        firstPoint = startOfInterval + (fibonacci(n - k - 1) / fibonacci(n - k + 1)) * (endOfInterval - startOfInterval);
     }
 
     @Override
     protected void setSecondPoint() {
-        secondPoint = startOfInterval + (fibonacci(n + 1) / fibonacci(n + 2)) * (endOfInterval - startOfInterval);
+        secondPoint = startOfInterval + (fibonacci(n - k) / fibonacci(n - k + 1)) * (endOfInterval - startOfInterval);
     }
 
     @Override
     public double getFunctionMinimum() {
-        while (n > 0) {
-
-            if (functionAtPoint(firstPoint) < functionAtPoint(secondPoint)) {
+        double firstPointFunction = functionAtPoint(firstPoint),
+                secondPointFunction = functionAtPoint(secondPoint);
+        for(k = 1; k < n - 2; k++) {
+            if(firstPointFunction < secondPointFunction) {
                 endOfInterval = secondPoint;
                 secondPoint = firstPoint;
-                firstPoint = startOfInterval + (fibonacci(n - 3) / fibonacci(n - 1))
-                        * (endOfInterval - startOfInterval);
+                setFirstPoint();
+                secondPointFunction = firstPointFunction;
+                firstPointFunction = functionAtPoint(firstPoint);
             } else {
                 startOfInterval = firstPoint;
                 firstPoint = secondPoint;
-                secondPoint = startOfInterval + (fibonacci(n - 2) / fibonacci(n - 1))
-                        * (endOfInterval - startOfInterval);
+                setSecondPoint();
+                firstPointFunction = secondPointFunction;
+                secondPointFunction = functionAtPoint(secondPoint);
             }
         }
 
