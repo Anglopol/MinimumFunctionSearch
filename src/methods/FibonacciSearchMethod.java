@@ -2,50 +2,43 @@ package methods;
 
 public class FibonacciSearchMethod extends AbstractMethod {
 
+    private static final double PHI = 1.6180339887;
     private double n;
-    private double k;
-
-    public FibonacciSearchMethod() {
-        super();
-        calcN();
-        k = 1;
-    }
 
     static public double fibonacci(double n) {
-        if (n - 1 <= 1) {
-            return n;
-        }
-        return (fibonacci(n - 1) + fibonacci(n - 2));
+        return (Math.pow(PHI, n) - Math.pow(1 - PHI, n)) / Math.sqrt(5);
     }
 
     @Override
     protected void setFirstPoint() {
-        firstPoint = startOfInterval + (fibonacci(n - k - 1) / fibonacci(n - k + 1)) * (endOfInterval - startOfInterval);
+        firstPoint = startOfInterval + (fibonacci(n - 2) / fibonacci(n)) * (endOfInterval - startOfInterval);
     }
 
     @Override
     protected void setSecondPoint() {
-        secondPoint = startOfInterval + (fibonacci(n - k) / fibonacci(n - k + 1)) * (endOfInterval - startOfInterval);
+        secondPoint = startOfInterval + (fibonacci(n - 1) / fibonacci(n)) * (endOfInterval - startOfInterval);
     }
 
     @Override
     public double getFunctionMinimum() {
+        calcN();
         double firstPointFunction = functionAtPoint(firstPoint),
                 secondPointFunction = functionAtPoint(secondPoint);
-        for(k = 1; k < n - 2; k++) {
-            if(firstPointFunction < secondPointFunction) {
+        while (n > 1) {
+            if (firstPointFunction < secondPointFunction) {
                 endOfInterval = secondPoint;
                 secondPoint = firstPoint;
-                setFirstPoint();
+                firstPoint = startOfInterval + (endOfInterval - secondPoint);
                 secondPointFunction = firstPointFunction;
                 firstPointFunction = functionAtPoint(firstPoint);
             } else {
                 startOfInterval = firstPoint;
                 firstPoint = secondPoint;
-                setSecondPoint();
+                secondPoint = endOfInterval - (firstPoint - startOfInterval);
                 firstPointFunction = secondPointFunction;
                 secondPointFunction = functionAtPoint(secondPoint);
             }
+            n--;
         }
 
         return (startOfInterval + endOfInterval) / 2;
