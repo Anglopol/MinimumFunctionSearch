@@ -5,7 +5,10 @@ import function.Function;
 public abstract class AbstractMethod {
     protected double firstPoint, secondPoint;
     protected double startOfInterval, endOfInterval;
+    protected double firstPointFunction, secondPointFunction;
+
     protected double delta = Function.EPSILON / 4;
+
     protected void setPoints() {
         setFirstPoint();
         setSecondPoint();
@@ -23,6 +26,6 @@ public abstract class AbstractMethod {
 
     protected abstract void setFirstPoint();
     protected abstract void setSecondPoint();
+    protected abstract void recalculate(boolean expression);
     public abstract double getFunctionMinimum();
-    public abstract void showCalculateOfFunctionMinimum();
 }

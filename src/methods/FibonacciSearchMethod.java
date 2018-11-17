@@ -27,27 +27,29 @@ public class FibonacciSearchMethod extends AbstractMethod {
 
     @Override
     public double getFunctionMinimum() {
-        calcN();
-        double firstPointFunction = functionAtPoint(firstPoint),
-                secondPointFunction = functionAtPoint(secondPoint);
-        while (n > 1) {
-            if (firstPointFunction < secondPointFunction) {
-                endOfInterval = secondPoint;
-                secondPoint = firstPoint;
-                firstPoint = startOfInterval + (endOfInterval - secondPoint);
-                secondPointFunction = firstPointFunction;
-                firstPointFunction = functionAtPoint(firstPoint);
-            } else {
-                startOfInterval = firstPoint;
-                firstPoint = secondPoint;
-                secondPoint = endOfInterval - (firstPoint - startOfInterval);
-                firstPointFunction = secondPointFunction;
-                secondPointFunction = functionAtPoint(secondPoint);
-            }
-            n--;
+        firstPointFunction = functionAtPoint(firstPoint);
+        secondPointFunction = functionAtPoint(secondPoint);
+        for(double i = n; i > 1; i--) {
+            recalculate(firstPointFunction < secondPointFunction);
         }
-
         return (startOfInterval + endOfInterval) / 2;
+    }
+
+    @Override
+    protected void recalculate(boolean expression) {
+        if (expression) {
+            endOfInterval = secondPoint;
+            secondPoint = firstPoint;
+            firstPoint = startOfInterval + (endOfInterval - secondPoint);
+            secondPointFunction = firstPointFunction;
+            firstPointFunction = functionAtPoint(firstPoint);
+        } else {
+            startOfInterval = firstPoint;
+            firstPoint = secondPoint;
+            secondPoint = endOfInterval - (firstPoint - startOfInterval);
+            firstPointFunction = secondPointFunction;
+            secondPointFunction = functionAtPoint(secondPoint);
+        }
     }
 
     private void calcN() {

@@ -13,13 +13,20 @@ public class BisectionMethod extends AbstractMethod {
     }
 
     @Override
+    protected void recalculate(boolean expression) {
+        if(expression) {
+            startOfInterval = secondPoint;
+        } else {
+            endOfInterval = firstPoint;
+        }
+    }
+
+    @Override
     public double getFunctionMinimum() {
         while (Math.abs(endOfInterval - startOfInterval) > delta) {
-            if (functionAtPoint(firstPoint) > functionAtPoint(secondPoint)) {
-                startOfInterval = secondPoint;
-            } else {
-                endOfInterval = firstPoint;
-            }
+            firstPointFunction = functionAtPoint(firstPoint);
+            secondPointFunction = functionAtPoint(secondPoint);
+            recalculate (firstPointFunction > secondPointFunction);
             setPoints();
         }
         return (startOfInterval + endOfInterval) / 2;
