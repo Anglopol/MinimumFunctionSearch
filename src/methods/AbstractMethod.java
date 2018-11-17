@@ -23,6 +23,6 @@ public abstract class AbstractMethod {
 
     protected abstract void setFirstPoint();
     protected abstract void setSecondPoint();
-
     public abstract double getFunctionMinimum();
+    public abstract void showCalculateOfFunctionMinimum();
 }
