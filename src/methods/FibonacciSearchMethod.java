@@ -5,6 +5,12 @@ public class FibonacciSearchMethod extends AbstractMethod {
     private static final double PHI = 1.6180339887;
     private double n;
 
+    public FibonacciSearchMethod() {
+        super();
+        calcN();
+        setPoints();
+    }
+
     static public double fibonacci(double n) {
         return (Math.pow(PHI, n) - Math.pow(1 - PHI, n)) / Math.sqrt(5);
     }
