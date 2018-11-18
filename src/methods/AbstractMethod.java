@@ -24,6 +24,15 @@ public abstract class AbstractMethod {
         return Function.functionAtPoint(x);
     }
 
+    protected void showCurrentCondition() {
+        System.out.println("x1: " + firstPoint
+                + "\nx2: " + secondPoint
+                + "\na: " + startOfInterval
+                + "\nb: " + endOfInterval
+                + "\nf(x1) = " + functionAtPoint(firstPoint)
+                + "\nf(x2) = " + functionAtPoint(secondPoint) + "\n");
+    }
+
     protected abstract void setFirstPoint();
     protected abstract void setSecondPoint();
     protected abstract void recalculate(boolean expression);

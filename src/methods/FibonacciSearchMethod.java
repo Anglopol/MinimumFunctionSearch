@@ -27,10 +27,13 @@ public class FibonacciSearchMethod extends AbstractMethod {
 
     @Override
     public double getFunctionMinimum() {
+        System.out.println("Fibonacci Search Method");
         firstPointFunction = functionAtPoint(firstPoint);
         secondPointFunction = functionAtPoint(secondPoint);
+        showCurrentCondition();
         for(double i = n; i > 1; i--) {
             recalculate(firstPointFunction < secondPointFunction);
+            showCurrentCondition();
         }
         return (startOfInterval + endOfInterval) / 2;
     }

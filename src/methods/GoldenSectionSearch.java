@@ -33,10 +33,13 @@ public class GoldenSectionSearch extends AbstractMethod {
 
     @Override
     public double getFunctionMinimum() {
+        System.out.println("Golden Section Search");
         firstPointFunction = functionAtPoint(firstPoint);
         secondPointFunction = functionAtPoint(secondPoint);
+        showCurrentCondition();
         while (Math.abs(endOfInterval - startOfInterval) > delta) {
             recalculate(firstPointFunction < secondPointFunction);
+            showCurrentCondition();
         }
         return (startOfInterval + endOfInterval) / 2;
     }
